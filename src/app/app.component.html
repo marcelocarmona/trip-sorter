@@ -5,7 +5,7 @@
 
 <div class="backimage">
   <div class="container">
-  <form [formGroup]="searchForm" (submit)="search($event)">
+  <form [formGroup]="searchForm" (submit)="search()">
     <mat-form-field>
       <mat-select placeholder="From" formControlName="from" required>
         <mat-option *ngFor="let city of cities" [value]="city">
