@@ -11,7 +11,7 @@ export class ApiService {
   constructor(private httpClient: HttpClient) { }
 
   getAllTrips(): Observable<Trips> {
-    return this.httpClient.get<Trips>('/assets/response.json');
+    return this.httpClient.get<Trips>('assets/response.json');
   }
 
 }
