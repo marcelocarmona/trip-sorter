@@ -1,21 +1,51 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<header>
+  <span class="title">Trip Sorter</span>
+  <mat-icon matListIcon>thumb_up</mat-icon>
+</header>
 
-<router-outlet></router-outlet>
+<div class="backimage">
+  <div class="container">
+  <form [formGroup]="searchForm" (submit)="search($event)">
+    <mat-form-field>
+      <mat-select placeholder="From" formControlName="from" required>
+        <mat-option *ngFor="let city of cities" [value]="city">
+          {{city}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select placeholder="To" formControlName="to" required>
+        <mat-option *ngFor="let city of cities" [value]="city">
+          {{city}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-radio-group formControlName="criteria" required>
+      <mat-radio-button value="netCost">
+        cheapest
+      </mat-radio-button>
+      <mat-radio-button value="durationInMinutes">
+        fastest
+      </mat-radio-button>
+    </mat-radio-group>
+
+    <button mat-button color="primary" [disabled]="!searchForm.valid">Search</button>
+  </form>
+</div>
+</div>
+
+<mat-divider></mat-divider>
+<mat-list class="container">
+  <mat-list-item *ngFor="let deal of path; last as last">
+    <h4 mat-line>{{deal.departure}} > {{deal.arrival}}</h4>
+    <p mat-line> {{deal.transport}} {{deal.reference}} {{deal.duration.h}}h{{deal.duration.m}}</p>
+    <span mat-line class="price">{{deal.netCost | currency:'EUR'}}</span>
+    <mat-divider [inset]="true" *ngIf="!last"></mat-divider>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  <mat-list-item class="total-item" *ngIf="total">
+    <h4 mat-line>Total {{total.totalMinutes | minutesToHours}} {{total.totalCost | currency:'EUR'}}</h4>
+  </mat-list-item>
+</mat-list>

@@ -1,0 +1,54 @@
+header {
+  padding: 8px 0;
+  background-color: rgba(0, 0, 0, 0.4117647058823529);
+  color: whitesmoke;
+  font-size: 23px;
+  text-shadow: 1px 1px 1px darkslategrey;
+  position: absolute;
+  border-bottom: 1px solid #585858;
+  width: 100%;
+
+  .title {
+    padding-left: 20px;
+  }
+}
+
+form {
+  padding: 10px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  margin: 20px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  background-color: #fffffff2;
+
+  mat-radio-button {
+    padding: 0 5px;
+  }
+}
+
+.backimage {
+  background-image: url(//www.propertyfinder.ae/img/banner-background/background-image-5.jpg);
+  padding: 60px 0 20px 0;
+}
+
+.container {
+  max-width: 800px;
+  min-width: 300px;
+  margin: 0 auto;
+}
+
+.price {
+  position: absolute;
+  right: 10px;
+  font-size: 1.5em !important;
+  font-weight: lighter !important;
+}
+
+.total-item {
+  font-size: 1.5em !important;
+  text-align: center
+}
