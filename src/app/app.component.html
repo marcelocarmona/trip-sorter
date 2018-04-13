@@ -5,38 +5,40 @@
 
 <div class="backimage">
   <div class="container">
-  <form [formGroup]="searchForm" (submit)="search()">
-    <mat-form-field>
-      <mat-select placeholder="From" formControlName="from" required>
-        <mat-option *ngFor="let city of cities" [value]="city">
-          {{city}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+    <form [formGroup]="searchForm" (submit)="search()">
+      <mat-form-field>
+        <mat-select placeholder="From" formControlName="from" required>
+          <mat-option *ngFor="let city of cities" [value]="city">
+            {{city}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-    <mat-form-field>
-      <mat-select placeholder="To" formControlName="to" required>
-        <mat-option *ngFor="let city of cities" [value]="city">
-          {{city}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="To" formControlName="to" required>
+          <mat-option *ngFor="let city of cities" [value]="city">
+            {{city}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-    <mat-radio-group formControlName="criteria" required>
-      <mat-radio-button value="netCost">
-        cheapest
-      </mat-radio-button>
-      <mat-radio-button value="durationInMinutes">
-        fastest
-      </mat-radio-button>
-    </mat-radio-group>
+      <mat-radio-group formControlName="criteria" required>
+        <mat-radio-button value="netCost">
+          cheapest
+        </mat-radio-button>
+        <mat-radio-button value="durationInMinutes">
+          fastest
+        </mat-radio-button>
+      </mat-radio-group>
 
-    <button mat-button color="primary" [disabled]="!searchForm.valid">Search</button>
-  </form>
+      <button mat-button color="primary" [disabled]="!searchForm.valid">Search</button>
+    </form>
+  </div>
 </div>
-</div>
 
-<mat-divider></mat-divider>
+<div *ngIf="!path" class="container no-search">
+  <mat-icon matListIcon class="search-icon">search</mat-icon>Find the route for your trip
+</div>
 <mat-list class="container">
   <mat-list-item *ngFor="let deal of path; last as last">
     <h4 mat-line>{{deal.departure}} > {{deal.arrival}}</h4>
@@ -44,7 +46,7 @@
     <span mat-line class="price">{{deal.netCost | currency:'EUR'}}</span>
     <mat-divider [inset]="true" *ngIf="!last"></mat-divider>
   </mat-list-item>
-  <mat-divider></mat-divider>
+  <mat-divider *ngIf="total"></mat-divider>
   <mat-list-item class="total-item" *ngIf="total">
     <h4 mat-line>Total {{total.totalMinutes | minutesToHours}} {{total.totalCost | currency:'EUR'}}</h4>
   </mat-list-item>
